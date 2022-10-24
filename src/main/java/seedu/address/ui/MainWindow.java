@@ -34,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ReminderWindow reminderWindow;
     private ReminderListPanel reminderListPanel;
     private CenterPanel centerPanel;
 
@@ -112,8 +113,10 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        reminderWindow = new ReminderWindow(logic.getAddressBook().getPersonList());
+
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        reminderListPanel = new ReminderListPanel(logic.getFilteredPersonList());
+        reminderListPanel = new ReminderListPanel(logic.getAddressBook().getPersonList());
         centerPanel = new CenterPanel(personListPanel, reminderListPanel);
         centerPanelPlaceholder.getChildren().add(centerPanel.getRoot());
 
@@ -168,6 +171,22 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Opens the reminder window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleReminder() {
+        if (!reminderWindow.isShowing()) {
+            reminderWindow.show();
+        } else {
+            reminderWindow.focus();
+        }
+    }
+
+    public PersonListPanel getPersonListPanel() {
+        return personListPanel;
+    }
+
+    /**
      * Executes the command and returns the result.
      *
      * @see seedu.address.logic.Logic#execute(String)
@@ -186,7 +205,9 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            reminderListPanel.updateItems(logic.getFilteredPersonList());
+            if (commandResult.isShowReminder()) {
+                handleReminder();
+            }
 
             return commandResult;
         } catch (CommandException | ParseException e) {

@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
@@ -18,7 +19,12 @@ public class ReminderCommand extends Command {
     public static final String COMMAND_WORD = "remind";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sets a reminder for a given contact\n"
-            + "Example: " + COMMAND_WORD + "1 r/update client information d/20-10-2022";
+            + "Example: " + COMMAND_WORD + " r/update client information d/20-10-2022";
+
+    public static final String MESSAGE_NOT_IMPLEMENTED_YET =
+            "Remind command not implemented yet!";
+
+    public static final String SHOWING_REMINDER_MESSAGE = "Displayed reminders.";
 
     public static final String MESSAGE_ADD_REMINDER_SUCCESS = "Added reminder to Person: %1$s";
     public static final String MESSAGE_DELETE_REMINDER_SUCCESS = "Removed reminder from Person: %1$s";
@@ -45,9 +51,14 @@ public class ReminderCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        personToEdit.getReminders().add(reminder);
+        Person editedPerson = new Person(
+                personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+                personToEdit.getAddress(), personToEdit.getBirthday(), reminder, personToEdit.getTags());
 
-        return new CommandResult(generateSuccessMessage(personToEdit));
+        model.setPerson(personToEdit, editedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        return new CommandResult(generateSuccessMessage(editedPerson));
     }
 
     /**
