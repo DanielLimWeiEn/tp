@@ -24,7 +24,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2223S1-CS2103T-W10-2/tp/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
@@ -37,7 +37,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2223S1-CS2103T-W10-2/tp/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2223S1-CS2103T-W10-2/tp/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -70,7 +70,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2223S1-CS2103T-W10-2/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
@@ -78,7 +78,7 @@ The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `Re
 
 The `CenterPanel` comprises two different panels within it, namely `PersonListPanel` and `ReminderListPanel`, with each of them displaying any number of `PersonCard` and `ReminderCard` respectively.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2223S1-CS2103T-W10-2/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2223S1-CS2103T-W10-2/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -89,7 +89,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2223S1-CS2103T-W10-2/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -117,9 +117,9 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2223S1-CS2103T-W10-2/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="900" />
+<img src="images/ModelClassDiagram.png" width="1000" />
 
 
 The `Model` component,
@@ -131,7 +131,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2223S1-CS2103T-W10-2/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -189,19 +189,30 @@ The Edit mechanism is facilitated by `EditCommand` and `EditCommandParser`. It a
 
 Step 1: The user inputs `edit 1 p/91234567 e/johndoe@example.com`. This the phone number and email address of the person with an index of 1 to be `91234567` and `johndoe@example.com` respectively.
 
-Step 2: `LogicManager` calls `AddressBookParser#parseCommand` with the user input.
+Step 2: `LogicManager` calls `AddressBookParser` with the user input.
 
-Step 3: `AddressBookParser` will parse the command word and create a new `EditCommandParser` and call its function `parse` with the index as the arguments.
+Step 3: `AddressBookParser` will parse the command word and create a new `EditCommandParser` and call its function `parse` with the rest of the user input as the arguments.
 
-Step 4: The `EditCommandParser#parse` will then parse the arguments and create a new `EditCommand` object.
+Step 4: The `EditCommandParser#parse` will then parse the insurance prefixes to create a new `EditPersonDescriptor` object.
 
-Step 5: The `LogicManager` then calls `EditCommand#execute`.
+Step 5: The `EditCommandParser#parse` will then create a new `EditCommand` object using the index and the `EditPersonDescriptor` object.
 
-Step 6: The `EditCommand` communicates with the `Model` to add the person by calling `Model#editPerson`.
+Step 5: The `LogicManager` then calls `EditCommand#execute` with the `Model` object.
 
-Step 7: `EditCommand` then returns a new `CommandResult` with the result of the execution.
+Step 6: The `EditCommand` calls `Model#getFilteredPersonList` to get the filtered `List` of `Person` objects.
 
-![Sequence diagram for the Edit Command](images/EditSequenceDiagram.png)
+Step 7: The `EditCommand` gets the `Person` to be edited from the `List`
+
+Step 8: The `EditCommand` calls its `createEditedPerson` method with the `Person` to be edited and the `EditPersonDescriptor` which returns the new edited `Person` .
+
+Step 9: The `EditCommand` calls the `setPerson` method of the `Model` object to replace the existing `Person` object with the new edited one.
+
+Step 11: The `EditCommand` then returns a new `CommandResult` object with the result of the execution.
+
+Step 12: The `LogicManager` then returns the `CommandResult` object.
+
+![Sequence diagram for the Edit Command](images/EditSequenceDiagramParse.png)
+![Sequence diagram for the Edit Command](images/EditSequenceDiagramExecute.png)
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
@@ -236,15 +247,15 @@ Step 4: The `InsuranceCommandParser#parse` will then parse the insurance prefixe
 
 Step 5: The `InsuranceCommandParser#parse` will then create a new `InsuranceCommand` object using the index and the `EditInsuranceDescriptor` object.
 
-Step 5: The `LogicManager` then calls `InsuranceCommand#execute` with the `Model` object.
+Step 6: The `LogicManager` then calls `InsuranceCommand#execute` with the `Model` object.
 
-Step 6: The `InsuranceCommand` calls `Model#getFilteredPersonList` to get the filtered `List` of `Person` objects.
+Step 7: The `InsuranceCommand` calls `Model#getFilteredPersonList` to get the filtered `List` of `Person` objects.
 
-Step 7: The `InsuranceCommand` gets the `Person` to be edited from the `List`
+Step 8: The `InsuranceCommand` gets the `Person` to be edited from the `List`
 
-Step 8: The `InsuranceCommand` calls its `createEditedPerson` method with the `Person` to be edited and the `EditInsuranceDescriptor` which returns the new edited `Person` .
+Step 9: The `InsuranceCommand` calls its `createEditedPerson` method with the `Person` to be edited and the `EditInsuranceDescriptor` which returns the new edited `Person` .
 
-Step 9: The `InsuranceCommand` calls the `setPerson` method of the `Model` object to replace the existing `Person` object with the new edited one.
+Step 10: The `InsuranceCommand` calls the `setPerson` method of the `Model` object to replace the existing `Person` object with the new edited one.
 
 Step 11: The `InsuranceCommand` then returns a new `CommandResult` object with the result of the execution.
 
@@ -310,10 +321,6 @@ Step 4: The `ReminderCommandParser#parse` will then parse the index, task and da
 
 Step 5: The `LogicManager` then calls `ReminderCommand#execute`.
 
-![Sequence diagram for the Parsing Remind Command](images/ParseReminderSequenceDiagram.png)
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ReminderCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-</div>
-
 Step 6: The `ReminderCommand` calls `Model#getFilteredPersonList` to get the filtered `List` of `Person` objects.
 
 Step 7: The `ReminderCommand` gets the `Person` to be edited from the `List`, using `List#get`.
@@ -322,8 +329,10 @@ Step 8: The `ReminderCommand` calls `Model#addReminder`, with the edited `Person
 
 Step 9: `ReminderCommand` then returns a new `CommandResult` with the result of the execution.
 
+![Sequence diagram for the Parsing Remind Command](images/ParseReminderSequenceDiagram.png)
 ![Sequence diagram for the Executing Remind Command](images/ExecuteReminderSequenceDiagram.png)
-
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ReminderCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 #### Design considerations:
 
@@ -403,7 +412,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                                                           | So that I can…​                                                                              |
 |----------|--------------------------------------------|------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
-| `* * *`  | Brand New User                             | see usage instructions                                                 | refer to instructions when I forget how to use the App                                       |
 | `* * *`  | User                                       | store my friends, clients and potential clients contact information    | easily contact my friends, clients and potential clients                                     |
 | `* * *`  | User                                       | view all of my contacts                                                | get an overview of all of my contacts                                                        |
 | `* * *`  | User                                       | view my contacts' information                                          | easily access my contacts' information                                                       |
@@ -581,15 +589,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 100 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to 100 persons without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. The system should respond within 2 seconds of entering a command.
 5. The app is not required to explain financial advisor terms.
 6. The app is not required to spell check or check for offensive terms.
 7. The system should still work even if there is no data file present.
-8. The system should replace the data file if it has corrupted.
-9. The system should save the data after each command has been processed.
+8. The system should save the data after each command has been processed.
 
 
 ### Full Glossary
@@ -829,7 +836,7 @@ testers are expected to do more *exploratory* testing.
       Expected: Finds all contacts. Details of the find command are shown in the status message.
 
    1. Test Case: `find n/[VALID NAME] t/[VALID TAG]`<br>
-      Expected: Finds contacts that match all the details giving. Details of the find command are shown in the status message. Multiple field search.
+      Expected: Find command fails. Error details are shown in the status message.
 
 1. Find contacts while persons are being shown unsuccessfully
 
@@ -893,7 +900,7 @@ testers are expected to do more *exploratory* testing.
 The application makes use of the [TestFX](https://github.com/TestFX/TestFX) library to carry out automated tests for
 the GUI. Below are common issues when trying to carry out GUI tests.
 
-#### **Problem: Keyboard and Mouse movements are not simulated in macOS systems, resulting in GUI tests failure**
+#### Problem: Keyboard and Mouse movements are not simulated in macOS systems, resulting in GUI tests failure
 
 * Reason: From macOS Mojave onwards, applications that do not have `Accessibility` permissions cannot simulate
 such keyboard and mouse movements. Therefore, the GUI tests that require simulation of keyboard and mouse movements
@@ -905,14 +912,14 @@ Then check the box beside `IntelliJ IDEA`. The figure below shows `Accessibility
 
 <img src="images/TroubleshootingGUiTestMacos.png" width="500px">
 
-#### **Problem: GitHub Actions Ubuntu environment cannot run GUI tests, resulting in Continuous Integration tests failure**
+#### Problem: GitHub Actions Ubuntu environment cannot run GUI tests, resulting in Continuous Integration tests failure
 
 * Reason: The automated GUI tests require tools on different Linux distributions to run properly as they need to
 display a GUI. The environment that GitHub Actions provides does not have these. Therefore, the GUI tests are
 getting stuck and taking very long to build with no success and this is causing Continuous Integration checks to
 fail.
 
-* Solution: Update the [`gradle.yml`](../.github/workflows/gradle.yml) file to make use of an additional [action](https://github.com/marketplace/actions/gabrielbb-xvfb-action)
+* Solution: Update the [`gradle.yml`](https://github.com/AY2223S1-CS2103T-W10-2/tp/blob/master/.github/workflows/gradle.yml) file to make use of an additional [action](https://github.com/marketplace/actions/gabrielbb-xvfb-action)
 on GitHub actions that installs [XVFB](http://elementalselenium.com/tips/38-headless) and runs headless tests with
 it. The figure below shows the new actions used to enable the CI environment to run the GUI tests properly.
 
